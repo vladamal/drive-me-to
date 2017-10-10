@@ -1,0 +1,27 @@
+{
+  "name": "driving-routes",
+  "version": "1.0.0",
+  "description": "Application for managing driving routes.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://malackov@bitbucket.org/malackov/driving-app.git"
+  },
+  "keywords": [
+    "driving",
+    "route"
+  ],
+  "author": "Vladimir Malacko",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/malackov/driving-app#readme",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-wiredep": "^3.0.1"
+  }
+}
