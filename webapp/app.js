@@ -4,7 +4,8 @@
     'use strict';
 
     angular.module('driving-routes', [
-        'ui.router'
+        'ui.router',
+        'LocalStorageModule'
     ]);
 
 }());
