@@ -2,9 +2,9 @@
 <div>
     <table class="table-hover">
         <tbody>
-        <tr>
+        <tr ng-repeat="route in vm.routes track by $index">
             <td>
-                <strong>route 1</strong>
+                <strong>#{{$index+1}} {{route.start}} - {{route.end}}</strong>
             </td>
             <td>&nbsp;</td>
             <td>
@@ -19,6 +19,6 @@
     </table>
 
     <h5>
-        <strong>You have no routes.</strong>
+        <b>You have {{vm.routes.length}} route<span ng-hide="vm.routes.length===1">s</span>.</b>
     </h5>
 </div>
