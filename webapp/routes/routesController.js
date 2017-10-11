@@ -4,9 +4,9 @@
 
     angular.module('driving-routes').controller("routesController", routesController);
 
-    routesController.$inject = ['routesService'];
+    routesController.$inject = ['routesService', '$state'];
 
-    function routesController(routesService) {
+    function routesController(routesService, $state) {
 
         var vm = this;
 
@@ -30,6 +30,11 @@
         vm.removeRoute = function(idx){
             vm.routes.splice(idx, 1);
             routesService.updateRoutes(vm.routes);
+        };
+
+        vm.viewRoute = function(route, idx){
+            route.index = idx;
+            $state.go('route-details', {route:route});
         };
 
     }
