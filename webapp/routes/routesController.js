@@ -16,7 +16,12 @@
         vm.addRoute = function(route){
             vm.routes.push(route);
             vm.newRoute = {};
-        }
+        };
+
+        vm.removeRoute = function(idx){
+            vm.routes.splice(idx, 1);
+            vm.newRoute = {};
+        };
 
     }
 
