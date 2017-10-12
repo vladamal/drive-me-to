@@ -5,6 +5,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-wiredep');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-nodemon');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -15,8 +17,8 @@ module.exports = function(grunt) {
         },
         concat: {
             js: {
-                src: ['webapp/**/*.js'],
-                dest: 'build/<%= pkg.name %>-<%= grunt.template.today("dd-mm-yyyy") %>.js'
+                src: ['webapp/app.js', 'webapp/**/*.js', 'webapp/app.config.js'],
+                dest: 'build/<%= pkg.name %>.min.js'
             }
         },
         uglify: {
@@ -31,13 +33,22 @@ module.exports = function(grunt) {
         },
         watch: {
             files: ['webapp/**/*.*'],
-            tasks: ['wiredep', 'concat', 'uglify'],
+            tasks: ['clean', 'concat'],
             options: {
                 livereload: true
+            }
+        },
+        clean: {
+            folder: ['build/']
+        },
+        nodemon: {
+            prod: {
+                script: 'index.js'
             }
         }
     });
 
-    grunt.registerTask('dev', ['wiredep', 'uglify', 'watch']);
+    grunt.registerTask('dev', ['clean', 'wiredep', 'concat', 'uglify', 'watch']);
+    grunt.registerTask('default', ['nodemon']);
 
 };
