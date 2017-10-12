@@ -1,19 +1,18 @@
 
-<button type="button" class="btn btn-warning"
-        ui-sref="routes"><b>Go Back</b></button>
+<div>
+    <button type="button" class="btn btn-warning"
+            ui-sref="routes"><b>Go Back</b></button>
 
-<h2>#{{index+1}} {{route.start}} - {{route.end}}</h2>
+    <h2 class="text-capitalize">#{{index+1}} {{route.start}} - {{route.end}}</h2>
 
-<div id="map"></div>
+    <div id="map"></div>
 
-<p ng-show="distance!=undefined"><strong>
-    <span>{{distance}} km.</span>
-    <span>About </span>
-    <span>{{hours}}</span>
-    <span ng-show="hours==1"> hour </span>
-    <span ng-show="hours>1"> hours </span>
-
-    <span>{{minutes}}</span>
-    <span ng-show="minutes==1"> min.</span>
-    <span ng-show="minutes>1"> mins.</span>
-</strong></p>
+    <p ng-show="distance!=undefined"><strong>
+        {{distance}} km. About {{hours}}
+        <span ng-show="hours==1"> hour </span>
+        <span ng-show="hours>1"> hours </span>
+        {{minutes}}
+        <span ng-show="minutes==1"> min.</span>
+        <span ng-show="minutes>1"> mins.</span>
+    </strong></p>
+</div>

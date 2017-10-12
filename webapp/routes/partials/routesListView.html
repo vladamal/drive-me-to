@@ -1,19 +1,19 @@
 
-<!--<div>-->
+<div>
     <table class="table-hover">
         <tbody>
         <tr ng-repeat="route in vm.routes track by $index">
             <td>
-                <strong>#{{$index+1}} {{route.start}} - {{route.end}}</strong>
+                <strong class="text-capitalize">#{{$index+1}} {{route.start}} - {{route.end}}</strong>
             </td>
             <td>&nbsp;</td>
             <td>
-                <button type="submit" class="btn btn-info"
+                <button type="button" class="btn btn-info"
                         ng-click="vm.viewRoute(route, $index)"><b>Detail</b></button>
             </td>
             <td>&nbsp;</td>
             <td>
-                <button type="submit" class="btn btn-danger"
+                <button type="button" class="btn btn-danger"
                         ng-click="vm.removeRoute($index)"><b>Delete</b></button>
             </td>
         </tr>
@@ -21,6 +21,6 @@
     </table>
 
     <h5>
-        <b>You have {{vm.routes.length}} route<span ng-hide="vm.routes.length===1">s</span>.</b>
+        <strong>You have {{vm.routes.length}} route<span ng-hide="vm.routes.length===1">s</span>.</strong>
     </h5>
-<!--</div>-->
+</div>
