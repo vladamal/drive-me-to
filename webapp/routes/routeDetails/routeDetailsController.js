@@ -4,9 +4,9 @@
 
     angular.module('driving-routes').controller("routeDetailsController", routeDetailsController);
 
-    routeDetailsController.$inject = ['$scope', '$stateParams', 'GoogleMapInitializer'];
+    routeDetailsController.$inject = ['$scope', '$stateParams', 'GoogleMapInitializer', 'toastr'];
 
-    function routeDetailsController($scope, $stateParams, GoogleMapInitializer) {
+    function routeDetailsController($scope, $stateParams, GoogleMapInitializer, toastr) {
 
         init();
         function init(){
@@ -47,7 +47,7 @@
                         directionsDisplay.setDirections(response);
                         $scope.$apply();
                     } else {
-                        // todo: kula value for origin or destination
+                        toastr.warning('Ruta nije prepoznata.', 'Obave\u0161tenje.');
                     }
                 });
 

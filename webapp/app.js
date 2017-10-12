@@ -5,7 +5,8 @@
 
     angular.module('driving-routes', [
         'ui.router',
-        'LocalStorageModule'
+        'LocalStorageModule',
+        'toastr'
     ]);
 
 }());
