@@ -4,16 +4,14 @@
 
     angular.module('driving-routes').controller("routeDetailsController", routeDetailsController);
 
-    routeDetailsController.$inject = ['$stateParams', 'GoogleMapInitializer'];
+    routeDetailsController.$inject = ['$scope', '$stateParams', 'GoogleMapInitializer'];
 
-    function routeDetailsController($stateParams, GoogleMapInitializer) {
-
-        var vmDetails = this;
+    function routeDetailsController($scope, $stateParams, GoogleMapInitializer) {
 
         init();
         function init(){
-            vmDetails.route = $stateParams.route;
-            vmDetails.index = $stateParams.route.index;
+            $scope.route = $stateParams.route;
+            $scope.index = $stateParams.route.index;
         }
 
         var map;
@@ -32,24 +30,24 @@
                 directionsDisplay.setMap(map);
 
                 var request = {
-                    origin: 'novi sad',
-                    destination: 'london',
+                    origin: $scope.route.start,
+                    destination: $scope.route.end,
                     travelMode: google.maps.DirectionsTravelMode.DRIVING
                 };
 
                 directionsService.route(request, function(response, status) {
                     if (status == google.maps.DirectionsStatus.OK) {
-
                         var distanceInMeters = response.routes[0].legs[0].distance.value;
-                        var distance = distanceInMeters/1000;
-                        console.log(distance + " km.");
+                        $scope.distance = distanceInMeters/1000;
 
                         var timeInSeconds = response.routes[0].legs[0].duration.value;
-                        var hours = Math.floor(timeInSeconds/3600);
-                        var minutes = timeInSeconds - hours*60;
-                        console.log("About " + hours + " hours and " + minutes + " minutes.");
+                        $scope.hours = Math.floor(timeInSeconds/3600);
+                        $scope.minutes = Math.round(timeInSeconds/60 - $scope.hours*60);
 
                         directionsDisplay.setDirections(response);
+                        $scope.$apply();
+                    } else {
+                        // todo: kula value for origin or destination
                     }
                 });
 
