@@ -1,12 +1,22 @@
-angular.module('driving-routes')
-    .factory('GoogleMapInitializer', function($window, $q){
+(function() {
 
-        var asyncUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyC6ZWmhfToW-3W_gHyXcHKXqbd1nNscznQ&callback=',
+    'use strict';
+
+    angular.module('driving-routes').factory("GoogleMapInitializer", GoogleMapInitializer);
+
+    GoogleMapInitializer.$inject = ['$window', '$q', 'mainConfig'];
+
+    function GoogleMapInitializer($window, $q, mainConfig) {
+
+        var asyncUrl =
+                'https://maps.googleapis.com/maps/api/js?key=' +
+                mainConfig.GoogleAPIkey
+                + '&callback=',
             mapsDefer = $q.defer();
 
         $window.googleMapsInitialized = mapsDefer.resolve;
 
-        var asyncLoad = function(asyncUrl, callbackName) {
+        var asyncLoad = function (asyncUrl, callbackName) {
             var script = document.createElement('script');
             script.src = asyncUrl + callbackName;
             document.body.appendChild(script);
@@ -14,6 +24,8 @@ angular.module('driving-routes')
         asyncLoad(asyncUrl, 'googleMapsInitialized');
 
         return {
-            mapsInitialized : mapsDefer.promise
+            mapsInitialized: mapsDefer.promise
         };
-    });
+    }
+
+})();
