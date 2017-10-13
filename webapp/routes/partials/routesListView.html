@@ -2,7 +2,7 @@
 <div>
     <table class="table-hover">
         <tbody>
-        <tr ng-repeat="route in vm.routes track by $index">
+        <tr ng-repeat="route in vm.routes | orderBy : -$index :true track by $index">
             <td>
                 <strong class="text-capitalize">#{{$index+1}} {{route.start}} - {{route.end}}</strong>
             </td>
