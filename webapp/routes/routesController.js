@@ -28,7 +28,7 @@
         };
 
         vm.removeRoute = function(idx){
-            vm.routes.splice(idx, 1);
+            vm.routes.splice(vm.routes.length -idx -1, 1);
             routesService.updateRoutes(vm.routes);
         };
 
