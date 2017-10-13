@@ -6,10 +6,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-wiredep');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-nodemon');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: {
+            js: ['build/', 'webapp/<%= pkg.name %>.min.js']
+        },
         wiredep: {
             target: {
                 src: 'webapp/index.html'
@@ -17,29 +21,29 @@ module.exports = function(grunt) {
         },
         concat: {
             js: {
-                src: ['webapp/app.js', 'webapp/**/*.js', 'webapp/app.config.js'],
+                src: ['webapp/app.js', 'webapp/app-config/*.js', 'webapp/routes/**/*.js'],
                 dest: 'build/<%= pkg.name %>.min.js'
             }
         },
         uglify: {
-            options: {
-                sourceMap: false
-            },
             dist: {
-                files: {
-                    'build/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
-                }
+                src: 'build/<%= pkg.name %>.min.js',
+                dest : 'webapp/<%= pkg.name %>.min.js'
+
+            }
+        },
+        copy: {
+            files: {
+                src: 'build/<%= pkg.name %>.min.js',
+                dest: 'webapp/<%= pkg.name %>.min.js'
             }
         },
         watch: {
             files: ['webapp/**/*.*'],
-            tasks: ['clean', 'concat'],
+            tasks: ['clean', 'concat', 'copy'],
             options: {
                 livereload: true
             }
-        },
-        clean: {
-            folder: ['build/']
         },
         nodemon: {
             prod: {
@@ -48,7 +52,8 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('dev', ['clean', 'wiredep', 'concat', 'uglify', 'watch']);
-    grunt.registerTask('default', ['nodemon']);
+    grunt.registerTask('dev', ['concat', 'copy', 'watch']);
+    grunt.registerTask('c', ['clean']);
+    grunt.registerTask('default', ['clean', 'wiredep', 'concat', 'uglify', 'nodemon']);
 
 };
