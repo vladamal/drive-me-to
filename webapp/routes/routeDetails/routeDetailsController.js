@@ -47,7 +47,7 @@
                         directionsDisplay.setDirections(response);
                         $scope.$apply();
                     } else {
-                        toastr.warning('Ruta nije prepoznata.', 'Obave\u0161tenje.');
+                        toastr.warning('Route is not recognized.', 'Notification.');
                     }
                 });
 
